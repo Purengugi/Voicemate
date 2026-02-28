@@ -11,4 +11,4 @@ Implementation Workflow with Expanded Features:
 - Users can adjust the reading speed of the text-to-speech feature.
 - The system highlights important text and detects key entities.
 - Users can take notes and organize them within the document.
-- Users can access detailed guides and FAQs for assistance.# Voicemate
+- Users can access detailed guides and FAQs for assistance.
