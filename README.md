@@ -1,5 +1,5 @@
-# PDF_VoiceMate
-An Explanation for “PDF Voice Mate” model
+# VoiceMate
+An Explanation for “Voice Mate” model
 A Emotion-Enhanced Document Interaction, aims to create a unique and interactive experience for users by integrating emotion detection with PDF reading.
 
 Implementation Workflow with Expanded Features:
@@ -12,4 +12,4 @@ Implementation Workflow with Expanded Features:
 - Users can adjust the reading speed of the text-to-speech feature.
 - The system highlights important text and detects key entities.
 - Users can take notes and organize them within the document.
--Users can access detailed guides and FAQs for assistance.# Voicemate
+- Users can access detailed guides and FAQs for assistance.# Voicemate
