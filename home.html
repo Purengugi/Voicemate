@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF VoiceMate</title>
+    <style>
+        /* ... (keep all existing styles) ... */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #2c2c2c;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        main {
+            display: flex;
+            justify-content: space-between;
+            padding: 40px;
+        }
+
+        .welcome-section {
+            display: flex;
+            width: 100%;
+        }
+
+        .upload-section {
+            width: 30%;
+            max-width: 300px;
+            background-color: #008B8B;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .upload-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .upload-section form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .drop-zone {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .file-input-label, .take-note-btn {
+            background-color: #121212;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        .take-note-btn {
+            border: none;
+            font-size: 16px;
+        }
+
+        .pdf-reader-section {
+            width: 65%;
+            background-color: #2c2c2c;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-left: 2rem;
+        }
+
+        .voice-selection, .speed-control, .volume-control {
+            margin: 1rem 0;
+        }
+
+        select, input[type="range"] {
+            display: block;
+            margin: 1rem auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        #textDisplay {
+            margin-top: 1rem;
+            background-color: #3c3c3c;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .highlight {
+        background-color: #008B8B; 
+        color: white; 
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        #music-player {
+            display: block;
+            margin: 1rem auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        #emotion-display {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #222;
+        }
+
+        .note-box {
+            position: fixed;
+            top: 0;
+            left: -30%; /* Start off-screen */
+            width: 30%;
+            height: 100%;
+            background-color: #008B8B;
+            padding: 2rem;
+            box-sizing: border-box;
+            transition: left 0.3s ease-in-out;
+            overflow-y: auto;
+        }
+
+        .note-box textarea {
+            width: 100%;
+            height: 80%;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: none;
+            resize: none;
+        }
+
+        .note-box button {
+            background-color: #121212;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        @media (max-width: 1200px) {
+            main {
+                flex-direction: column;
+            }
+            .upload-section, .pdf-reader-section {
+                width: 100%;
+                max-width: none;
+                margin-left: 0;
+                margin-top: 2rem;
+            }
+        }
+.detect-entities-btn {
+    background-color: #121212;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    flex: 1;
+    margin: 0 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.file-input-label, .take-note-btn, .detect-entities-btn {
+    flex-basis: calc(33.33% - 10px);
+    margin: 5px;
+}
+
+.logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="logo">
+            <img src="images/logo.png">PDF VoiceMate
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#features">Features</a>
+            <a href="us.html">About Us</a>
+            <a href="#logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <section class="welcome-section">
+            <div class="upload-section" id="upload-section">
+                <h2>Upload your PDF & <br> Let our AI do the rest!</h2>
+                <form id="upload-form">
+                    <div class="drop-zone" id="drop-zone">
+                        Drag & Drop your PDF here
+                    </div>
+                    <div class="button-group">
+                        <input type="file" id="file-input" accept=".pdf">
+                        <label for="file-input" class="file-input-label">CHOOSE PDF</label>
+                        <button type="button" class="take-note-btn">TAKE NOTE</button>
+                        <button type="button" class="detect-entities-btn">DETECT ENTITIES</button>
+                    </div>
+                </form>
+            </div>
+            <div class="pdf-reader-section">
+                <h2>Universal PDF Reader with Emotion Detection</h2>
+                <div class="voice-selection">
+                    <label for="voiceSelect">Select Voice:</label>
+                    <select id="voiceSelect"></select>
+                </div>
+                <div class="speed-control">
+                    <label for="speedRange">Playback Speed: <span id="speedValue">1.0</span>x</label>
+                    <input type="range" id="speedRange" min="0.5" max="2" value="1" step="0.1">
+                </div>
+                <div class="volume-control">
+                    <label for="volumeRange">Volume: <span id="volumeValue">1.0</span></label>
+                    <input type="range" id="volumeRange" min="0" max="1" value="1" step="0.1">
+                </div>
+                <div class="control-buttons">
+                    <button id="readButton">Read PDF</button>
+                    <button id="pauseResumeReaderButton">Pause Reader</button>
+                    <button id="pauseResumeMusicButton">Pause Music</button>
+                </div>
+                <div id="textDisplay"></div>
+                <audio id="music-player" loop></audio>
+                <div id="emotion-display"></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 PDF VoiceMate Website | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <div class="note-box" id="noteBox">
+        <h2>Take Notes</h2>
+        <textarea id="noteTextarea" placeholder="Type your notes here..."></textarea>
+        <button id="saveNoteBtn">Save Note</button>
+        <button id="closeNoteBtn">Close</button>
+    </div>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script>
+       
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.worker.min.js';
+
+let voices = [];
+let currentUtterance = null;
+let isReaderPaused = false;
+let isMusicPaused = false;
+let pdfText = '';
+const musicPlayer = document.getElementById('music-player');
+const emotionDisplay = document.getElementById('emotion-display');
+
+function loadVoices() {
+    return new Promise(resolve => {
+        let id;
+        id = setInterval(() => {
+            voices = window.speechSynthesis.getVoices();
+            if (voices.length !== 0) {
+                clearInterval(id);
+                populateVoiceList();
+                resolve(voices);
+            }
+        }, 10);
+    });
+}
+
+function populateVoiceList() {
+    const voiceSelect = document.getElementById('voiceSelect');
+    voiceSelect.innerHTML = '';
+    voices.forEach((voice, index) => {
+        const option = document.createElement('option');
+        option.textContent = `${voice.name} (${voice.lang})`;
+        option.setAttribute('data-lang', voice.lang);
+        option.setAttribute('data-name', voice.name);
+        voiceSelect.appendChild(option);
+    });
+}
+
+document.getElementById('readButton').addEventListener('click', async () => {
+    const fileInput = document.getElementById('file-input');
+    const file = fileInput.files[0];
+    if (file && file.type === 'application/pdf') {
+        try {
+            pdfText = await extractTextFromPDF(file);
+            const selectedVoice = document.getElementById('voiceSelect').selectedOptions[0];
+            const speed = parseFloat(document.getElementById('speedRange').value);
+            const volume = parseFloat(document.getElementById('volumeRange').value);
+            
+            // Detect emotion and play music before starting to read
+            const emotion = detectEmotion(pdfText);
+            playMusic(emotion);
+            
+            await speak(pdfText, selectedVoice.getAttribute('data-name'), speed, volume);
+        } catch (error) {
+            console.error('Error in reading PDF:', error);
+            alert('Error in reading PDF: ' + error.message);
+        }
+    } else {
+        alert('Please select a valid PDF file.');
+    }
+});
+
+document.getElementById('pauseResumeReaderButton').addEventListener('click', () => {
+    const pauseResumeReaderButton = document.getElementById('pauseResumeReaderButton');
+    if (window.speechSynthesis.speaking) {
+        if (isReaderPaused) {
+            window.speechSynthesis.resume();
+            pauseResumeReaderButton.textContent = 'Pause Reader';
+            isReaderPaused = false;
+        } else {
+            window.speechSynthesis.pause();
+            pauseResumeReaderButton.textContent = 'Resume Reader';
+            isReaderPaused = true;
+        }
+    }
+});
+
+document.getElementById('pauseResumeMusicButton').addEventListener('click', () => {
+    const pauseResumeMusicButton = document.getElementById('pauseResumeMusicButton');
+    if (isMusicPaused) {
+        musicPlayer.play();
+        pauseResumeMusicButton.textContent = 'Pause Music';
+        isMusicPaused = false;
+    } else {
+        musicPlayer.pause();
+        pauseResumeMusicButton.textContent = 'Resume Music';
+        isMusicPaused = true;
+    }
+});
+
+document.getElementById('speedRange').addEventListener('input', function() {
+    document.getElementById('speedValue').textContent = this.value;
+});
+
+document.getElementById('volumeRange').addEventListener('input', function() {
+    document.getElementById('volumeValue').textContent = this.value;
+    if (currentUtterance) {
+        currentUtterance.volume = parseFloat(this.value);
+    }
+});
+
+async function extractTextFromPDF(file) {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let text = '';
+    for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        text += content.items.map(item => item.str).join(' ') + ' ';
+    }
+    return text;
+}
+
+async function speak(text, voiceName, speed, volume) {
+    await loadVoices();
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    let selectedVoice = voices.find(voice => voice.name === voiceName);
+
+    if (selectedVoice) {
+        utterance.voice = selectedVoice;
+    } else {
+        console.warn('Selected voice not found. Using default.');
+    }
+
+    utterance.rate = speed;
+    utterance.volume = volume;
+
+    const textDisplay = document.getElementById('textDisplay');
+    textDisplay.innerHTML = '';
+
+    let words = text.split(/\s+/);
+    let wordIndex = 0;
+    let spans = [];
+
+    words.forEach((word, index) => {
+        let span = document.createElement('span');
+        span.textContent = word + ' ';
+        spans.push(span);
+        textDisplay.appendChild(span);
+    });
+
+    utterance.onboundary = (event) => {
+        if (event.name === 'word') {
+            if (wordIndex > 0) {
+                spans[wordIndex - 1].classList.remove('highlight');
+            }
+            if (wordIndex < spans.length) {
+                spans[wordIndex].classList.add('highlight');
+                wordIndex++;
+            }
+        }
+    };
+
+    utterance.onend = () => {
+        spans.forEach(span => span.classList.remove('highlight'));
+        document.getElementById('pauseResumeReaderButton').textContent = 'Pause Reader';
+        isReaderPaused = false;
+        musicPlayer.pause();
+        document.getElementById('pauseResumeMusicButton').textContent = 'Resume Music';
+        isMusicPaused = true;
+    };
+
+    window.speechSynthesis.cancel(); // Cancel any ongoing speech
+    currentUtterance = utterance;
+    window.speechSynthesis.speak(utterance);
+    document.getElementById('pauseResumeReaderButton').textContent = 'Pause Reader';
+    isReaderPaused = false;
+}
+
+function detectEmotion(text) {
+    const emotions = {
+        happy: ['happy', 'joy', 'excited'],
+        sad: ['sad', 'unhappy', 'depressed'],
+        angry: ['angry', 'mad', 'furious'],
+        surprised: ['surprised', 'shocked', 'amazed'],
+    };
+
+    for (const [emotion, keywords] of Object.entries(emotions)) {
+        if (keywords.some(keyword => text.toLowerCase().includes(keyword))) {
+            return emotion;
+        }
+    }
+    return 'neutral';
+}
+
+function playMusic(emotion) {
+    let musicSrc = '';
+    switch (emotion) {
+        case 'happy':
+            musicSrc = 'audio/happy.mp3'; // Replace with actual path
+            break;
+        case 'sad':
+            musicSrc = 'audio/sad.mp3'; // Replace with actual path
+            break;
+        case 'angry':
+            musicSrc = 'audio/scary.mp3'; // Replace with actual path
+            break;
+        case 'surprised':
+            musicSrc = 'audio/adventure.mp3'; // Replace with actual path
+            break;
+        default:
+            musicSrc = 'audio/romantic.mp3'; // No music for neutral
+    }
+    if (musicSrc) {
+        musicPlayer.src = musicSrc;
+        musicPlayer.play();
+        emotionDisplay.textContent = `Detected emotion: ${emotion}`;
+        document.getElementById('pauseResumeMusicButton').textContent = 'Pause Music';
+        isMusicPaused = false;
+    }
+}
+
+loadVoices();
+
+// Drag and drop functionality
+document.addEventListener("DOMContentLoaded", function() {
+    const fileInput = document.getElementById('file-input');
+    const dropZone = document.getElementById('drop-zone');
+    const uploadForm = document.getElementById('upload-form');
+
+    fileInput.addEventListener('change', handleFileUpload);
+    dropZone.addEventListener('drop', handleFileDrop);
+    dropZone.addEventListener('dragover', (event) => event.preventDefault());
+
+    uploadForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const file = fileInput.files[0];
+        if (file) {
+            displayFileName(file.name);
+            // Process file here (e.g., send to server for OCR, entity recognition, etc.)
+        }
+    });
+
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            displayFileName(file.name);
+            // Process file here (e.g., send to server for OCR, entity recognition, etc.)
+        }
+    }
+
+    function handleFileDrop(event) {
+        event.preventDefault();
+        const file = event.dataTransfer.files[0];
+        if (file) {
+            displayFileName(file.name);
+            // Process file here (e.g., send to server for OCR, entity recognition, etc.)
+        }
+    }
+
+    function displayFileName(name) {
+        alert(`Selected file: ${name}`);
+    }
+
+    document.getElementById('takeNotesBtn').addEventListener('click', function() {
+        const notesBox = document.getElementById('notesBox');
+        notesBox.style.left = '0%';
+    });
+
+    document.getElementById('closeBtn').addEventListener('click', function() {
+        const notesBox = document.getElementById('notesBox');
+        notesBox.style.left = '-50%';
+    });
+});
+ // Update the file input label when a file is selected
+ document.getElementById('file-input').addEventListener('change', function(event) {
+            const fileName = event.target.files[0]?.name || 'CHOOSE PDF';
+            document.querySelector('.file-input-label').textContent = fileName;
+        });
+
+
+        // ... (keep all existing JavaScript code) ...
+
+        // Add this new code at the end of your existing JavaScript
+        document.addEventListener("DOMContentLoaded", function() {
+            const takeNoteBtn = document.querySelector('.take-note-btn');
+            const noteBox = document.getElementById('noteBox');
+            const closeNoteBtn = document.getElementById('closeNoteBtn');
+            const saveNoteBtn = document.getElementById('saveNoteBtn');
+
+            takeNoteBtn.addEventListener('click', function() {
+                noteBox.style.left = '0';
+            });
+
+            closeNoteBtn.addEventListener('click', function() {
+                noteBox.style.left = '-30%';
+            });
+
+            saveNoteBtn.addEventListener('click', function() {
+                const noteText = document.getElementById('noteTextarea').value;
+                // Here you can add code to save the note (e.g., send to a server)
+                alert('Note saved: ' + noteText);
+                noteBox.style.left = '-30%';
+            });
+            const detectEntitiesBtn = document.querySelector('.detect-entities-btn');
+    
+    detectEntitiesBtn.addEventListener('click', async function() {
+        const fileInput = document.getElementById('file-input');
+        const file = fileInput.files[0];
+        
+        if (file && file.type === 'application/pdf') {
+            try {
+                const text = await extractTextFromPDF(file);
+                const entities = await detectEntities(text);
+                displayEntities(entities);
+            } catch (error) {
+                console.error('Error in detecting entities:', error);
+                alert('Error in detecting entities: ' + error.message);
+            }
+        } else {
+            alert('Please select a valid PDF file.');
+        }
+    });
+
+    async function extractTextFromPDF(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const typedarray = new Uint8Array(e.target.result);
+                pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
+                    let fullText = '';
+                    const numPages = pdf.numPages;
+                    let promises = [];
+
+                    for (let i = 1; i <= numPages; i++) {
+                        promises.push(getPageText(pdf, i));
+                    }
+
+                    Promise.all(promises).then(function(pageTexts) {
+                        fullText = pageTexts.join(' ');
+                        resolve(fullText);
+                    }).catch(reject);
+                }).catch(reject);
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    }
+
+    function getPageText(pdf, pageNum) {
+        return pdf.getPage(pageNum).then(function(page) {
+            return page.getTextContent().then(function(textContent) {
+                return textContent.items.map(item => item.str).join(' ');
+            });
+        });
+    }
+
+    async function detectEntities(text) {
+        try {
+            const response = await fetch('http://localhost:5000/api/detect-entities', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: text }),
+            });
+            const data = await response.json();
+            return data.entities;
+        } catch (error) {
+            console.error('Error:', error);
+            throw error;
+        }
+    }
+
+    function displayEntities(entities) {
+        const textDisplay = document.getElementById('textDisplay');
+        textDisplay.innerHTML = '<h3>Detected Entities:</h3>';
+        
+        if (entities.names && entities.names.length > 0) {
+            textDisplay.innerHTML += '<h4>Names:</h4><ul>' + 
+                entities.names.map(name => `<li>${name}</li>`).join('') + 
+                '</ul>';
+        }
+        
+        if (entities.places && entities.places.length > 0) {
+            textDisplay.innerHTML += '<h4>Places:</h4><ul>' + 
+                entities.places.map(place => `<li>${place}</li>`).join('') + 
+                '</ul>';
+        }
+        
+        if ((!entities.names || entities.names.length === 0) && (!entities.places || entities.places.length === 0)) {
+            textDisplay.innerHTML += '<p>No entities detected.</p>';
+        }
+    }
+});
+        
+    </script>
+</body>
+</html>

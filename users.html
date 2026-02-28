@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF VoiceMate - Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: rgb(225, 250, 161);
+        }
+        .container {
+            margin-top: 60px; /* Space for fixed header */
+            padding: 20px;
+        }
+        section {
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #008B8B;
+            border-radius: 5px;
+        }
+        h2,h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #000000;
+        }
+        p {
+            font-size: 18px;
+        }
+        #return-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #008B8B;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+        #return-to-top:hover {
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section id="users">
+            <h2>USERS</h2>
+            <h3>Tools</h3>
+            <p>Explore various tools and features available on the PDF VoiceMate platform to enhance your document experience, including AI-powered functionalities and customization options.</p>
+            <p>- AI Speech
+                UI Development: Crafting a user-friendly interface that ensures seamless navigation and interaction with the AI speech functionalities.
+                <br>
+                - Start Chat
+                Entity Recognition
+                Integrating AI to identify and highlight key entities within the PDF, such as names, dates, and locations.
+                <br>
+                - Start Chat
+                Emotion Recognition
+                Utilizing AI to analyze and detect the emotional tone of the text within the PDF. 
+                <br>
+                - Download Now
+                Voice Modulation
+                Allowing customization of the AI voice's pitch, speed, and tone to suit user preferences. </p>
+            <h3>My Account</h3>
+            <p>Manage your personal account settings, preferences, and subscription details. Access your profile, view your activity, and update your information by logging into PDF VoiceMate</p>
+            <h3>Languages and Voices</h3>
+            <p>Browse and select from a variety of languages and AI-generated voices for reading your PDFs. Customize your reading experience based on your linguistic preferences and desired tone.</p>
+        </section>
+        
+        <section id="legal">
+            <h2>LEGAL</h2>
+            <h3>Pricing</h3>
+            <p>The Present Version of PDF VoiceMate is TOTALLY FREE to use!</p>
+            <h3>Terms of Use</h3>
+            <p>Read the terms and conditions governing your use of the PDF VoiceMate platform. Understand your rights and responsibilities while using the service.</p>
+            <h3>Privacy Policy</h3>
+            <p>Learn about how PDF VoiceMate collects, uses, and protects your personal information. Understand our commitment to maintaining your privacy and data security.</p>
+        </section>
+        
+        <section id="company">
+            <h2>COMPANY</h2>
+            <h3>Blog</h3>
+            <p>Stay updated with the latest news, insights, and updates from PDF VoiceMate. Read articles on developments, use cases, and industry trends.
+                <br>New Blogs will be posted soon!
+            </p>
+            <h3>About Us</h3>
+            <p>Discover the mission, vision, and team behind PDF VoiceMate. Learn about our goals and the people driving the innovation behind the platform.</p>
+            <p>We are a team of passionate 3rd-year Computer Science Engineering students dedicated to leveraging technology for innovative solutions.</p>
+        <div class="profiles">
+            <div class="profile">
+                <a href="https://www.linkedin.com/in/polani-keerthi-varshini-b919872a8/" target="_blank">LinkedIn Profile</a>
+                <br>
+                <a href="https://www.linkedin.com/in/kotha-venkata-lakshmi-sahithi-7238792b4/" target="_blank">LinkedIn Profile</a>
+            </div>
+            <h3>Contact Us</h3>
+            <p>Get in touch with the PDF VoiceMate support team for any inquiries, feedback, or assistance. Find contact details and reach out to us directly.</p>
+            <p>Contact Us:
+                <br>Polanikeerthivarshini@gmail.com<br>
+                kothasahithi15@gmail.com<br>
+                </p>
+        </section>
+        
+        <section id="support">
+            <h2>SUPPORT</h2>
+            <h3>FAQ</h3>
+            <p>Find answers to frequently asked questions about PDF VoiceMate. Get quick help on common issues and learn more about how to use the platform effectively.</p>
+            <h3>Tech Blog</h3>
+            <p>Read technical articles and insights on the technology and methods used in PDF VoiceMate. Dive deeper into the innovations and methodologies powering our services.</p>
+            <h3>Tutorials</h3>
+            <p>Access guides and tutorials to help you get the most out of PDF VoiceMate. Learn how to use various features and optimize your experience with step-by-step instructions.</p>
+        </section>
+    </div>
+
+    <button id="return-to-top">Return to Top</button>
+
+    <script>
+        // Handle scroll event for return-to-top button
+        window.addEventListener('scroll', function() {
+            const button = document.getElementById('return-to-top');
+            if (window.scrollY > 300) {
+                button.style.display = 'block';
+            } else {
+                button.style.display = 'none';
+            }
+        });
+
+        document.getElementById('return-to-top').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

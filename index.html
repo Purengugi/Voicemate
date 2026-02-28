@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF VoiceMate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: white;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #2c2c2c;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        
+        main {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .upload-area {
+            background-color: #008B8B;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .upload-btn {
+            background-color: #008B8B;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-box {
+            background-color: #2c2c2c;
+            border-radius: 5px;
+            padding: 30px;
+            text-align: left;
+        }
+        
+        .feature-box h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .feature-box button {
+            background-color: #008B8B;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #2c2c2c;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 50px;
+            margin: 0 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background-color: #474747;
+            border-radius: 10px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+        }
+
+        .footer {
+            background-color: #121212;
+            padding: 20px;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-social a {
+            color: #ffffff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px 0;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .footer-column a {
+            color: #ffffff;
+            margin-bottom: 5px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #1e90ff;
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            color: #ffffff;
+        }
+
+        section {
+            width: 60%;
+            margin-bottom: 2em;
+            background: #008B8B;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #upload-section {
+            text-align: center;
+        }
+
+        #drop-area {
+            border: 2px dashed #ccc;
+            padding: 2em;
+            margin: 1em 0;
+            background-color: #008B8B;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1em;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .container1 {
+            text-align: center;
+            padding: 50px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #1E1E1E;
+        }
+
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        header a:hover {
+            color: #00BFFF;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin: auto;
+            padding: 50px;
+        }
+
+        .main-content h1 {
+            font-size: 48px;
+        }
+
+        .main-content p {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        #return-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #008B8B;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none; /* Initially hidden */
+}
+
+#return-to-top:hover {
+    background-color: #005f5f;
+}
+
+a{
+    font-size: 18px;
+}
+.logo img {
+    width: 40px; /* Adjust as needed */
+    height: auto;
+    margin-right: 10px;
+}
+.signin-btn {
+            background-color: #005f5f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .signin-btn:hover {
+            background-color: #005f5f;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png">PDF VOICEMATE
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#tools">Tools</a>
+            <a href="#features">Features</a>
+            <a href="us.html">About Us</a>
+            <a href="login.html">Log In</a>
+        </nav>
+    </header>
+    <div class="container1" id="home">
+        <div class="main-content">
+            <h1>Welcome to PDF VoiceMate</h1>
+            <br>
+            <p>where we bring your documents to life with the power of AI. Our advanced technology provides you with a seamless and enhanced 
+                document experience. Let our AI handle the heavy lifting while you enjoy precise, emotion-driven insights from your PDFs.</p>
+            <br>
+            <p>Already using PDF VoiceMate? <a href="login.html" class="signin-btn">Sign In</a></p>
+        </div>
+    </div>
+    <!-- Tools Section -->
+        <main>
+            <div class="container" id="tools">
+            <header>
+                <p><center> Discover the functionalities that make PDF VoiceMate Website a powerful tool for your needs.</center></p>
+            </header>
+
+            <div class="features">
+                <div class="feature-box">
+                    <h2>AI Speech</h2>
+                    <p>AI voice reads PDF Content with background music with theme, Emotion detection, Entity detection speed control, sound control, note taking and many more!</p>
+                    <button>Start AI-Speech</button>
+                </div>
+                <div class="feature-box">
+                    <h2>Entity Recognition</h2>
+                    <p>Integrating AI to identify and highlight key entities within the PDF, such as names, dates, and locations. This enhances the document's readability and searchability.</p>
+                    <button>Detect Now</button>
+                </div>
+                <div class="feature-box">
+                    <h2>Emotion Recognition</h2>
+                    <p>Utilizing AI to analyze and detect the emotional tone of the text within the PDF. This allows for an enriched reading experience by providing context and sentiment insights.</p>
+                    <button>Detect Now</button>
+                </div>
+                <div class="feature-box">
+                    <h2>Background Music</h2>
+                    <p>Enhance the user experience by allowing users to play background music while the AI reads the PDF aloud, making the reading process more engaging and pleasant.</p>
+                    <button>Select Images</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container" id="features">
+        <header>
+            <p><center>Unlock the complete potential of our platform by logging in to PDF VoiceMate</center></p>
+        </header>
+        
+        <main class="features-grid">
+            <div class="feature-card">
+                <img src="images/uidev.jpeg" alt="UI Development">
+                <h3>UI Development</h3>
+                <p>Crafting a user-friendly interface that ensures seamless navigation & interaction with the AI speech.</p>
+            </div>
+            <div class="feature-card">
+                <img src="images/uploadpdf.png" alt="Upload PDF">
+                <h3>PDF Upload</h3>
+                <p>Adding an option to play background music while the AI reads the PDF aloud.</p>
+            </div>
+            <div class="feature-card">
+                <img src="images/lang.png" alt="Multi-Language Support">
+                <h3>Multi-Language Support</h3>
+                <p>Ensuring the website supports multiple languages to cater to a diverse user base.</p>
+            </div>
+            <div class="feature-card">
+                <img src="images/voice.png" alt="AI-Generated Voices">
+                <h3>AI-Generated Voices</h3>
+                <p>Access a variety of AI-generated voices to read out your PDF content in different tones.</p>
+            </div>
+            <div class="feature-card">
+                <img src="images/music.png" alt="Background Music">
+                <h3>Background Music</h3>
+                <p>Adding an option to play background music while the AI reads the PDF aloud.</p>
+            </div>
+            <div class="feature-card">
+                <img src="images/bookmark.png" alt="Bookmarking">
+                <h3>Bookmarking</h3>
+                <p>Allowing users to mark important PDFs for easy reference and retrieval.</p>
+            </div>
+            <div class="feature-card">
+                <img src="images/speed.png" alt="Speed Control">
+                <h3>Speed Control</h3>
+                <p>Allowing users to adjust the reading speed of the AI voice seamlessly.</p>
+            </div>
+            <div class="feature-card">
+                <img src="images/note.png" alt="Note-Taking">
+                <h3>Note-Taking</h3>
+                <p>Providing tools for users to note down points by Note-Taking from the PDF.</p>
+            </div>
+        </main>
+    </div>
+
+    <header>
+        <p><center>Target Applications to our PDF VoiceMate</center></p>
+    </header>
+
+    <main class="features-grid">
+        <div class="feature-card">
+            <img src="images/individual.png">
+            <h3>INDIVIDUALS</h3>
+            <p>Individuals looking to enhance their reading experience.</p>
+        </div>
+        <div class="feature-card">
+            <img src="images/student.png">
+            <h3>STUDENTS</h3>
+            <p>Facilitating accessible and engaging learning materials for students.</p>
+        </div>
+        <div class="feature-card">
+            <img src="images/corporate.png">
+            <h3>CORPORATE ENVIRONMENTS</h3>
+            <p>Improving document accessibility in corporate environments.</p>
+        </div>
+    </main>
+    <header>
+        <h2><center>Get Started to access all features now!</center></h2>
+    </header>
+    <footer class="footer">
+        <div class="footer-social">
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-youtube"></i></a>
+          <a href="#"><i class="fa fa-github"></i></a>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>USERS</h3>
+            <a href="users.html#users">Tools</a>
+            <a href="users.html#users">My Account</a>
+            <a href="users.html#users">Languages and Voices</a>
+          </div>
+          <div class="footer-column">
+            <h3>LEGAL</h3>
+            <a href="users.html#legal">Pricing</a>
+            <a href="users.html#legal">Terms of use</a>
+            <a href="users.html#legal">Privacy policy</a>
+          </div>
+          <div class="footer-column">
+            <h3>COMPANY</h3>
+            <a href="users.html#company">Blog</a>
+            <a href="users.html#company">About us</a>
+            <a href="users.html#company">Contact Us</a>
+          </div>
+          <div class="footer-column">
+            <h3>SUPPORT</h3>
+            <a href="users.html#support">FAQ</a>
+            <a href="users.html#support">Tech Blog</a>
+            <a href="users.html#support">Tutorials</a>
+          </div>
+        </div>
+        <br>
+        <div class="footer-bottom">
+          <p>© Copyright PDF VoiceMate 2024</p>
+        </div>
+        <br>
+    </footer>
+    <button id="return-to-top">Return to Top</button>
+
+    <script>
+        // Handle file upload
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                displayFileName(file.name);
+                // Process file here (e.g., send to server for OCR, entity recognition, etc.)
+            }
+        }
+
+        function handleFileDrop(event) {
+            event.preventDefault();
+            const file = event.dataTransfer.files[0];
+            if (file) {
+                displayFileName(file.name);
+                // Process file here (e.g., send to server for OCR, entity recognition, etc.)
+            }
+        }
+
+        function displayFileName(name) {
+            fileNameDisplay.textContent = `Uploaded file: ${name}`;
+        }
+
+        window.addEventListener('scroll', function() {
+    const button = document.getElementById('return-to-top');
+    if (window.scrollY > 300) { // Adjust this value as needed
+        button.style.display = 'block';
+    } else {
+        button.style.display = 'none';
+    }
+});
+
+document.getElementById('return-to-top').addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+    </script>
+</body>
+</html>
