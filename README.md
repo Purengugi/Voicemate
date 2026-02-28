@@ -1,6 +1,5 @@
 # VoiceMate
-An Explanation for “Voice Mate” model
-A Emotion-Enhanced Document Interaction, aims to create a unique and interactive experience for users by integrating emotion detection with PDF reading.
+Voice Mate is an Emotion-Enhanced Document Interaction, aimed to create a unique and interactive experience for users by integrating emotion detection with PDF reading.
 
 Implementation Workflow with Expanded Features:
 
